@@ -3,108 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Dayanara ❤️</title>
+<title>Para Dayanara 💖</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
 body{
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    overflow-x:hidden;
-}
-
-.container{
-    max-width:600px;
-    margin:auto;
-    padding:20px;
-}
-
-.card{
-    background:white;
-    border-radius:25px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 15px 30px rgba(0,0,0,.25);
-}
-
-h1{color:#ff4d6d;margin-bottom:10px;}
-
-.question{font-size:18px;margin:15px 0;}
-
-/* BOTONES MEJORADOS */
-.buttons{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#ff9ecf,#ffc3a0);
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:20px;
-    margin-top:20px;
+    height:100vh;
+    text-align:center;
 }
 
+.container{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    max-width:400px;
+    width:90%;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+h1{color:#ff4081;}
+
 button{
-    padding:16px 28px;
-    font-size:20px;
+    padding:15px 25px;
+    margin:10px;
     border:none;
-    border-radius:40px;
+    border-radius:12px;
+    font-size:18px;
     cursor:pointer;
-    transition:.2s;
-    box-shadow:0 8px 15px rgba(0,0,0,.2);
+    transition:.3s;
 }
 
 #si{
-    background:linear-gradient(45deg,#ff4d6d,#ff758c);
+    background:#4CAF50;
     color:white;
 }
 
-#si:active{
-    transform:scale(.95);
+#si:hover{
+    transform:scale(1.1);
 }
 
 #no{
-    background:#eeeeee;
+    background:#ff5252;
+    color:white;
     position:relative;
 }
 
-#mensaje{
+#resultado{
     margin-top:20px;
-    color:#ff4d6d;
-    font-weight:bold;
-    font-size:22px;
 }
 
-#foto{
-    display:none;
-    margin-top:15px;
+img{
     width:100%;
     border-radius:15px;
+    margin-top:15px;
 }
 
-/* FRASES */
 .frases{
     margin-top:20px;
-    background:#fff0f5;
-    padding:15px;
-    border-radius:15px;
-}
-
-.frases h3{color:#ff4d6d;margin-bottom:8px;}
-.frases p{font-size:14px;margin:4px 0;}
-
-/* CORAZONES */
-.heart{
-    position:fixed;
-    color:white;
-    animation:flotar linear forwards;
-}
-
-@keyframes flotar{
-    from{transform:translateY(100vh);opacity:1;}
-    to{transform:translateY(-10vh);opacity:0;}
-}
-
-/* RESPONSIVE */
-@media(max-width:480px){
-    button{font-size:18px;padding:18px 30px;}
+    font-style:italic;
+    color:#555;
+    font-size:14px;
 }
 </style>
 </head>
@@ -112,68 +75,46 @@ button{
 <body>
 
 <div class="container">
-<div class="card">
+<h1>Dayanara 💕</h1>
 
-<h1>Dayanara 💖</h1>
+<p>¿El sábado a las 8pm puedo llevarte algo bonito?</p>
 
-<p class="question"><b>¿Este sábado a las 8 de la noche puedo llevarte algo?</b></p>
+<button id="si" onclick="aceptar()">Sí</button>
+<button id="no" onmouseover="moverNo()">No</button>
 
-<div class="buttons">
-<button id="si" onclick="acepto()">Sí ❤️</button>
-<button id="no" onmouseover="huir()" onclick="huir()">No 😢</button>
-</div>
-
-<div id="mensaje"></div>
-
-<img id="foto" src="MiVida.jpeg" alt="Nosotros">
+<div id="resultado"></div>
 
 <div class="frases">
-<h3>Para el amor de mi vida</h3>
-<p>Eres quien ilumina mis días.</p>
-<p>Contigo todo se siente mejor.</p>
-<p>Eres mi persona favorita.</p>
-<p>Quiero seguir creando momentos contigo.</p>
+<p>Eres el amor de mi vida.</p>
+<p>Contigo todo es mejor.</p>
+<p>Mi lugar favorito es a tu lado.</p>
 </div>
 
-</div>
 </div>
 
 <script>
-let tamaño=20;
-const btnSi=document.getElementById("si");
-const btnNo=document.getElementById("no");
 
-function huir(){
-    tamaño+=5;
-    btnSi.style.fontSize=tamaño+"px";
-
-    btnNo.style.position="fixed";
-
-    const x=Math.random()*(window.innerWidth-120);
-    const y=Math.random()*(window.innerHeight-80);
-
-    btnNo.style.left=x+"px";
-    btnNo.style.top=y+"px";
+function moverNo(){
+    let btn = document.getElementById("no");
+    btn.style.position="absolute";
+    btn.style.left=Math.random()*250+"px";
+    btn.style.top=Math.random()*250+"px";
 }
 
-function acepto(){
-    document.getElementById("mensaje").innerHTML="Eres el amor de mi vida ❤️";
-    document.getElementById("foto").style.display="block";
+function aceptar(){
+    document.getElementById("resultado").innerHTML = `
+    <h2>Eres el amor de mi vida ❤️</h2>
+    <img src="MiVida.jpeg">
+
+    <iframe width="100%" height="200"
+    src="https://www.youtube.com/embed/wAjHQXrIj9o?autoplay=1"
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+    </iframe>
+    `;
 }
 
-/* corazones */
-function crearCorazon(){
-    const c=document.createElement("div");
-    c.className="heart";
-    c.innerHTML="❤️";
-    c.style.left=Math.random()*100+"vw";
-    c.style.fontSize=(Math.random()*20+15)+"px";
-    c.style.animationDuration=(Math.random()*3+4)+"s";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),5000);
-}
-setInterval(crearCorazon,400);
 </script>
 
 </body>
 </html>
+
