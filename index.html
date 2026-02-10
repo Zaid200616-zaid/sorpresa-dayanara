@@ -6,109 +6,77 @@
 <title>Para Dayanara ❤️</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
 body{
-  min-height:100vh;
-  background: linear-gradient(135deg,#ff5f9e,#ffc3d9);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  padding:15px;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(135deg,#ff5fa2,#ffc3da);
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:10px;
 }
 
 .container{
-  background:#fff;
-  width:100%;
-  max-width:420px;
-  border-radius:24px;
-  padding:22px;
-  text-align:center;
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
+background:white;
+width:100%;
+max-width:380px;
+border-radius:20px;
+padding:20px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+position:relative;
 }
 
-h1{
-  color:#ff2d6f;
-  font-size:1.8rem;
-  margin-bottom:8px;
-}
+h1{ color:#ff2d6f; }
 
-.question{
-  font-size:1.05rem;
-  margin-bottom:18px;
-}
+.question{ margin:15px 0; }
 
 .buttons{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:15px;
+display:flex;
+gap:10px;
+position:relative;
 }
 
 button{
-  flex:1;
-  padding:16px;
-  font-size:1.1rem;
-  border:none;
-  border-radius:40px;
-  cursor:pointer;
-  transition:transform .15s ease;
+flex:1;
+padding:15px;
+border:none;
+border-radius:30px;
+font-size:18px;
+cursor:pointer;
 }
 
 #si{
-  background:#ff2d6f;
-  color:#fff;
-  box-shadow:0 6px 18px rgba(255,45,111,.5);
-}
-
-#si:active{
-  transform:scale(0.95);
+background:#ff2d6f;
+color:white;
 }
 
 #no{
-  background:#f1f1f1;
-  color:#333;
-  position:relative;
-}
-
-.frases{
-  font-size:.95rem;
-  font-style:italic;
-  color:#555;
-  margin-top:10px;
+background:#eee;
 }
 
 img{
-  width:100%;
-  border-radius:18px;
-  margin-top:18px;
-  display:none;
+width:100%;
+margin-top:15px;
+border-radius:15px;
+display:none;
 }
 
-/* Corazones */
 .heart{
-  position:fixed;
-  font-size:22px;
-  animation:float 2.5s linear forwards;
-  pointer-events:none;
+position:fixed;
+font-size:22px;
+animation:float 2s linear forwards;
+pointer-events:none;
 }
 
 @keyframes float{
-  0%{opacity:1; transform:translateY(0) scale(1);}
-  100%{opacity:0; transform:translateY(-160px) scale(1.6);}
+0%{opacity:1; transform:translateY(0);}
+100%{opacity:0; transform:translateY(-150px);}
 }
 
-/* Tablets */
-@media (min-width:600px){
-  h1{font-size:2rem;}
-  .question{font-size:1.15rem;}
-  button{font-size:1.2rem;}
+@media (max-width:400px){
+button{font-size:16px;}
 }
 </style>
 </head>
@@ -117,66 +85,72 @@ img{
 <div class="container">
 
 <h1>Dayanara ❤️</h1>
-
-<p class="question">
-¿Este sábado puedo llevarte algo a las 8 de la noche?
-</p>
+<p class="question">¿El sábado puedo llevarte algo a las 8 de la noche?</p>
 
 <div class="buttons">
-  <button id="si">Sí 💖</button>
-  <button id="no">No 🙈</button>
+<button id="si">Sí 💖</button>
+<button id="no">No 🙈</button>
 </div>
 
-<div class="frases">
-<p>Eres el amor de mi vida.</p>
-<p>Contigo todo tiene sentido.</p>
-</div>
+<p>Eres el amor de mi vida</p>
 
-<img id="foto" src="MiVida.jpeg" alt="Nosotros">
+<img id="foto" src="MiVida.jpeg">
 
 </div>
 
-<video id="video" src="ojitos.mp4" preload="auto"></video>
+<!-- YouTube oculto -->
+<iframe 
+id="youtubePlayer"
+width="0"
+height="0"
+src=""
+allow="autoplay"
+style="display:none;">
+</iframe>
 
 <script>
 const si = document.getElementById("si");
 const no = document.getElementById("no");
 const foto = document.getElementById("foto");
-const video = document.getElementById("video");
+const player = document.getElementById("youtubePlayer");
 
-// NO se mueve rápido pero sin salirse de la pantalla
-no.addEventListener("touchstart", moverNo);
+let musicaActiva=false;
+
+// Botón NO se mueve
 no.addEventListener("mouseover", moverNo);
+no.addEventListener("touchstart", moverNo);
 
 function moverNo(){
-  const x = Math.random()*120 - 60;
-  const y = Math.random()*120 - 60;
-  no.style.transform = `translate(${x}px, ${y}px)`;
+let x=Math.random()*100-50;
+let y=Math.random()*100-50;
+no.style.transform=`translate(${x}px,${y}px)`;
 }
 
-// SI
+// Botón SI
 si.addEventListener("click", ()=>{
-  foto.style.display = "block";
 
-  if(video.paused){
-    video.play();
-  }
+foto.style.display="block";
 
-  for(let i=0;i<18;i++){
-    crearCorazon();
-  }
+if(!musicaActiva){
+player.src="https://www.youtube.com/embed/wAjHQXrIj9o?autoplay=1";
+musicaActiva=true;
+}
+
+// corazones
+for(let i=0;i<18;i++){
+crearCorazon();
+}
+
 });
 
-// Corazones
 function crearCorazon(){
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.textContent = "❤️";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.bottom = "20px";
-  document.body.appendChild(heart);
-
-  setTimeout(()=>heart.remove(),2500);
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.bottom="20px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),2000);
 }
 </script>
 
