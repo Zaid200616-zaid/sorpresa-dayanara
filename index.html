@@ -6,137 +6,178 @@
 <title>Para Dayanara ❤️</title>
 
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
 body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#ff4d6d,#ff9a9e);
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
+  min-height:100vh;
+  background: linear-gradient(135deg,#ff5f9e,#ffc3d9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  padding:15px;
 }
 
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 15px 30px rgba(0,0,0,.25);
-text-align:center;
-width:90%;
-max-width:420px;
+.container{
+  background:#fff;
+  width:100%;
+  max-width:420px;
+  border-radius:24px;
+  padding:22px;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
 }
 
-h1{color:#ff4d6d;}
+h1{
+  color:#ff2d6f;
+  font-size:1.8rem;
+  margin-bottom:8px;
+}
 
-.botones{
-display:flex;
-justify-content:center;
-gap:15px;
-margin-top:20px;
+.question{
+  font-size:1.05rem;
+  margin-bottom:18px;
+}
+
+.buttons{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:15px;
 }
 
 button{
-padding:15px 28px;
-font-size:18px;
-border:none;
-border-radius:30px;
-cursor:pointer;
+  flex:1;
+  padding:16px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  transition:transform .15s ease;
 }
 
 #si{
-background:#ff4d6d;
-color:white;
+  background:#ff2d6f;
+  color:#fff;
+  box-shadow:0 6px 18px rgba(255,45,111,.5);
+}
+
+#si:active{
+  transform:scale(0.95);
 }
 
 #no{
-background:#ddd;
-position:fixed;
+  background:#f1f1f1;
+  color:#333;
+  position:relative;
 }
 
-#resultado img{
-width:100%;
-border-radius:15px;
-margin-top:10px;
+.frases{
+  font-size:.95rem;
+  font-style:italic;
+  color:#555;
+  margin-top:10px;
 }
 
-/* CORAZONES */
+img{
+  width:100%;
+  border-radius:18px;
+  margin-top:18px;
+  display:none;
+}
+
+/* Corazones */
 .heart{
-position:fixed;
-font-size:20px;
-animation:flotar 3s linear forwards;
+  position:fixed;
+  font-size:22px;
+  animation:float 2.5s linear forwards;
+  pointer-events:none;
 }
 
-@keyframes flotar{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-200px);opacity:0;}
+@keyframes float{
+  0%{opacity:1; transform:translateY(0) scale(1);}
+  100%{opacity:0; transform:translateY(-160px) scale(1.6);}
 }
 
+/* Tablets */
+@media (min-width:600px){
+  h1{font-size:2rem;}
+  .question{font-size:1.15rem;}
+  button{font-size:1.2rem;}
+}
 </style>
 </head>
-
 <body>
 
-<div class="card">
+<div class="container">
 
-<h1>Dayanara 💖</h1>
+<h1>Dayanara ❤️</h1>
 
-<p><b>¿El sábado a las 8pm puedo llevarte algo?</b></p>
+<p class="question">
+¿Este sábado puedo llevarte algo a las 8 de la noche?
+</p>
 
-<div class="botones">
-<button id="si" onclick="aceptar()">Sí ❤️</button>
-<button id="no" onmouseover="huir()">No 😢</button>
+<div class="buttons">
+  <button id="si">Sí 💖</button>
+  <button id="no">No 🙈</button>
 </div>
 
-<div id="resultado"></div>
+<div class="frases">
+<p>Eres el amor de mi vida.</p>
+<p>Contigo todo tiene sentido.</p>
+</div>
+
+<img id="foto" src="MiVida.jpeg" alt="Nosotros">
 
 </div>
+
+<video id="video" src="ojitos.mp4" preload="auto"></video>
 
 <script>
+const si = document.getElementById("si");
+const no = document.getElementById("no");
+const foto = document.getElementById("foto");
+const video = document.getElementById("video");
 
-const btnNo = document.getElementById("no");
-let videoYaCreado = false;
+// NO se mueve rápido pero sin salirse de la pantalla
+no.addEventListener("touchstart", moverNo);
+no.addEventListener("mouseover", moverNo);
 
-function huir(){
-let x = Math.random() * (window.innerWidth - 100);
-let y = Math.random() * (window.innerHeight - 50);
-btnNo.style.left = x + "px";
-btnNo.style.top = y + "px";
+function moverNo(){
+  const x = Math.random()*120 - 60;
+  const y = Math.random()*120 - 60;
+  no.style.transform = `translate(${x}px, ${y}px)`;
 }
 
+// SI
+si.addEventListener("click", ()=>{
+  foto.style.display = "block";
+
+  if(video.paused){
+    video.play();
+  }
+
+  for(let i=0;i<18;i++){
+    crearCorazon();
+  }
+});
+
+// Corazones
 function crearCorazon(){
-let heart = document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left = Math.random()*100+"vw";
-heart.style.top = Math.random()*100+"vh";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),3000);
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.bottom = "20px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),2500);
 }
-
-function aceptar(){
-
-// Genera muchos corazones cada vez
-for(let i=0;i<10;i++){
-crearCorazon();
-}
-
-if(!videoYaCreado){
-
-document.getElementById("resultado").innerHTML = `
-<h2>Eres el amor de mi vida ❤️</h2>
-<img src="MiVida.jpeg">
-<iframe width="100%" height="220"
-src="https://www.youtube.com/embed/wAjHQXrIj9o?autoplay=1"
-allow="autoplay"></iframe>
-`;
-
-videoYaCreado = true;
-}
-
-}
-
 </script>
 
 </body>
