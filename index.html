@@ -32,15 +32,13 @@ h1{color:#ff4d6d;margin-bottom:10px;}
 
 .question{font-size:18px;margin:15px 0;}
 
-.buttons{position:relative;height:80px;}
-
+/* BOTONES MEJORADOS */
 .buttons{
-    position:relative;
-    height:110px;
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:15px;
+    gap:20px;
+    margin-top:20px;
 }
 
 button{
@@ -49,41 +47,22 @@ button{
     border:none;
     border-radius:40px;
     cursor:pointer;
-    transition: transform .15s ease, box-shadow .15s ease, background .2s;
+    transition:.2s;
     box-shadow:0 8px 15px rgba(0,0,0,.2);
 }
 
-/* Botón SI */
 #si{
     background:linear-gradient(45deg,#ff4d6d,#ff758c);
     color:white;
 }
 
-#si:hover{
-    transform:scale(1.08);
-}
-
 #si:active{
-    transform:scale(0.96);
-    box-shadow:0 3px 6px rgba(0,0,0,.2);
+    transform:scale(.95);
 }
 
-/* Botón NO */
 #no{
     background:#eeeeee;
-    position:absolute;
-}
-
-#no:hover{
-    background:#dddddd;
-}
-
-/* Responsive extra para celular */
-@media(max-width:480px){
-    button{
-        padding:18px 30px;
-        font-size:22px;
-    }
+    position:relative;
 }
 
 #mensaje{
@@ -100,7 +79,18 @@ button{
     border-radius:15px;
 }
 
-/* corazones */
+/* FRASES */
+.frases{
+    margin-top:20px;
+    background:#fff0f5;
+    padding:15px;
+    border-radius:15px;
+}
+
+.frases h3{color:#ff4d6d;margin-bottom:8px;}
+.frases p{font-size:14px;margin:4px 0;}
+
+/* CORAZONES */
 .heart{
     position:fixed;
     color:white;
@@ -110,6 +100,11 @@ button{
 @keyframes flotar{
     from{transform:translateY(100vh);opacity:1;}
     to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+    button{font-size:18px;padding:18px 30px;}
 }
 </style>
 </head>
@@ -121,7 +116,7 @@ button{
 
 <h1>Dayanara 💖</h1>
 
-<p>¿Este sábado a las 8 de la noche puedo llevarte algo?</p>
+<p class="question"><b>¿Este sábado a las 8 de la noche puedo llevarte algo?</b></p>
 
 <div class="buttons">
 <button id="si" onclick="acepto()">Sí ❤️</button>
@@ -132,11 +127,19 @@ button{
 
 <img id="foto" src="MiVida.jpeg" alt="Nosotros">
 
+<div class="frases">
+<h3>Para el amor de mi vida</h3>
+<p>Eres quien ilumina mis días.</p>
+<p>Contigo todo se siente mejor.</p>
+<p>Eres mi persona favorita.</p>
+<p>Quiero seguir creando momentos contigo.</p>
+</div>
+
 </div>
 </div>
 
 <script>
-let tamaño=18;
+let tamaño=20;
 const btnSi=document.getElementById("si");
 const btnNo=document.getElementById("no");
 
@@ -144,8 +147,11 @@ function huir(){
     tamaño+=5;
     btnSi.style.fontSize=tamaño+"px";
 
-    const x=Math.random()*(window.innerWidth-100);
-    const y=Math.random()*(window.innerHeight-60);
+    btnNo.style.position="fixed";
+
+    const x=Math.random()*(window.innerWidth-120);
+    const y=Math.random()*(window.innerHeight-80);
+
     btnNo.style.left=x+"px";
     btnNo.style.top=y+"px";
 }
